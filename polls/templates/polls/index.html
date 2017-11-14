@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Welcome</title>
+        {% load static %}
+        <link href="{% static 'polls/bootstrap.min.css' %}" rel="stylesheet" >
+        <link href="{% static 'polls/styles.css' %}" rel="stylesheet" >    
+    </head>
+    <body>
+        <div class="container">
+                <h2>Welcome To Polls System</h2>
+                <h5>Select A Question To Vote</h5>
+                {% if latest_questions %}
+                    <ul>
+                    {% for q in latest_questions %}
+                        <li><a class="choice" href=" {% url 'polls:detail' q.id %} ">{{q.question_text}}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    No Polls Available
+                {% endif %}
+                
+            </div>
+    </body>
+</html>
+

@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Question Details</title>
+    {% load static %}
+    <link href="{% static 'polls/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'polls/styles.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h3>{{question}}</h3>
+        {% if error_message %}
+        <p>
+            <strong>{{ error_message }}</strong>
+        </p>
+        {% endif %}
+        <form action="{% url 'polls:vote' question.id %}" method="POST">
+            {% csrf_token %} 
+            {% for choice in question.choice_set.all %}
+                <div class="form-inline">
+                    <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+                    <label class="form-control choice" for="choice{{forloop.counter}}">{{choice}}</label>
+                </div>
+                <br>
+             {% endfor %}
+            <input type="submit" value="Vote" class="btn btn-info btn-vote">
+
+        </form>
+    </div>
+</body>
+
+</html>

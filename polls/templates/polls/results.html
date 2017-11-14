@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Question Polls Result</title>
+    {% load static %}
+    <link href="{% static 'polls/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'polls/styles.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h3>{{question}}</h3>
+        <ul>
+            {% for choice in question.choice_set.all %}
+            <li class="choice">{{ choice.choice_text }} -- <span class="badge badge-info">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span> </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+    </div>
+    
+
+
+</body>
+
+</html>
